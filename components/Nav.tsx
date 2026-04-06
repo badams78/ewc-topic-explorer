@@ -13,6 +13,7 @@ const TABS: { id: ViewName; label: string }[] = [
   { id: "topic", label: "Topic Detail" },
   { id: "crosscutting", label: "Cross-Cutting" },
   { id: "trends", label: "Trends" },
+  { id: "explanation", label: "Explanation" },
 ];
 
 export default function Nav({ activeView, onViewChange, selectedTopicName }: NavProps) {

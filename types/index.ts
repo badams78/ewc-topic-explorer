@@ -34,7 +34,7 @@ export interface ExplorerData {
   groups: Record<string, GroupInfo>;
 }
 
-export type ViewName = "dashboard" | "topic" | "crosscutting" | "trends";
+export type ViewName = "dashboard" | "topic" | "crosscutting" | "trends" | "explanation";
 
 export interface AppState {
   view: ViewName;

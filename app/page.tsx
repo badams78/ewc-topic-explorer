@@ -8,6 +8,7 @@ import TopicDetail from "@/components/TopicDetail";
 import CrossCutting from "@/components/CrossCutting";
 import ArticleDetail from "@/components/ArticleDetail";
 import Trends from "@/components/Trends";
+import Explanation from "@/components/Explanation";
 
 export default function Home() {
   const [data, setData] = useState<ExplorerData | null>(null);
@@ -73,6 +74,9 @@ export default function Home() {
         )}
         {view === "trends" && (
           <Trends data={data} onTopicSelect={handleTopicSelect} />
+        )}
+        {view === "explanation" && (
+          <Explanation data={data} />
         )}
       </main>
 
