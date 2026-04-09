@@ -144,15 +144,15 @@ export default function TopicDetail({ data, topicCode, onTopicSelect, onArticleS
           {/* Temporal Trend */}
           {yearlyTrend.length > 1 && (
             <div className="bg-white border rounded-lg p-4">
-              <h3 className="text-sm font-semibold text-gray-700 mb-3">Topic Share by Year (% at 65+)</h3>
+              <h3 className="text-sm font-semibold text-gray-700 mb-3">Articles Per Year (scored 65+)</h3>
               <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={yearlyTrend}>
+                <BarChart data={yearlyTrend}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="year" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} unit="%" />
-                  <Tooltip formatter={(v) => `${v}%`} />
-                  <Line type="monotone" dataKey="pct" stroke={groupColor} strokeWidth={2} dot={{ r: 3 }} />
-                </LineChart>
+                  <YAxis tick={{ fontSize: 12 }} allowDecimals={false} />
+                  <Tooltip formatter={(v) => [`${v} articles`, "Count"]} />
+                  <Bar dataKey="count" fill={groupColor} radius={[4, 4, 0, 0]} />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           )}
@@ -160,7 +160,7 @@ export default function TopicDetail({ data, topicCode, onTopicSelect, onArticleS
 
         {/* Right: Related Topics */}
         <div className="bg-white border rounded-lg p-4">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">Related Topics</h3>
+          <h3 className="text-sm font-semibold text-gray-700 mb-3">Related Topics (by shared articles)</h3>
           <div className="space-y-2">
             {relatedTopics.map((rt) => {
               const t = data.topics[rt.code];
@@ -171,12 +171,11 @@ export default function TopicDetail({ data, topicCode, onTopicSelect, onArticleS
                   onClick={() => onTopicSelect(rt.code)}
                   className="w-full flex items-center justify-between p-2 rounded hover:bg-gray-50 text-left"
                 >
-                  <div>
+                  <div className="flex-1">
                     <div className="text-sm font-medium text-gray-900">{t.name}</div>
-                    <div className="text-xs text-gray-500">{rt.overlap} shared articles</div>
                   </div>
-                  <span className="text-xs font-mono text-gray-400">
-                    {(rt.jaccard * 100).toFixed(0)}%
+                  <span className="text-sm font-bold text-blue-600 shrink-0">
+                    {rt.overlap} shared
                   </span>
                 </button>
               );
